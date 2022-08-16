@@ -1,0 +1,15 @@
+div.menuLabel {
+  position: relative;
+}
+
+ul.menu {
+  position: absolute;
+  border: 2px solid black;
+  background-color: white;
+  top: 16px;
+  left: 0;
+}
+
+ul.menu li {
+    white-space: nowrap;
+}

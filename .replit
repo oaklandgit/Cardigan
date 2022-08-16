@@ -1,5 +1,5 @@
-run="npm run dev"
-entrypoint="src/App.jsx"
+run = "npm run dev"
+entrypoint = "src/App.jsx"
 
 [nix]
 channel = "stable-21_11"
@@ -18,8 +18,10 @@ language = "nodejs"
 [unitTest]
 language = "nodejs"
 
+[languages]
+
 [languages.javascript]
 pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
 
-  [languages.javascript.languageServer]
-  start = [ "typescript-language-server", "--stdio" ]
+[languages.javascript.languageServer]
+start = "typescript-language-server --stdio"

@@ -1,4 +1,5 @@
 button.button {
+  position: absolute;
   border: 2px solid black;
   padding: 3px 10px;
   border-radius: 10px;

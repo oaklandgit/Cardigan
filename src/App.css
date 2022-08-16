@@ -1,6 +1,6 @@
 @font-face {
     font-family: Chicago;
-    src: url('./assets/ChicagoFLF.ttf');
+    src: url('./assets/fonts/ChicagoFLF.ttf');
 }
 
 * {
@@ -11,7 +11,15 @@
   box-sizing: border-box;
 }
 
-#stack {
+.movable:hover {
+  cursor: grab;
+}
+
+.movable:active {
+  cursor: grabbing;
+}
+
+#desktop {
   display: grid;
   place-content: center;
   height: 100vh;
@@ -20,4 +28,18 @@
   background-repeat: repeat;
   background-color: white;
   background-image: url('./assets/patterns/3.svg');
+}
+
+#stack {
+  position: relative;
+}
+
+#debuggerbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+}
+#debuggerbar button {
+  margin: 4px 6px;
 }
