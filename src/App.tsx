@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import Menubar from './components/Menubar';
 import Card from './components/Card';
-import { v4 as uuid } from 'uuid';
+import Debugger from './components/Debugger';
+import { getMaxZIndex } from './lib/helpers';
 import './App.css';
 
 function App() {
@@ -48,57 +49,6 @@ function App() {
     return cardList.findIndex(item => item.id === id);
   }
 
-  const prevCard = () => {
-
-    const prevCards = cardList.filter((card) => {
-      return card.backgroundId && card.id != currentCardId;
-    });
-
-    const prevCardId = prevCards[prevCards.length - 1].id;
-    console.log(prevCards, prevCardId);
-
-    setCurrentCardId(prevCardId);
-  }
-
-
-  // const currIndex = cardIndexById(currentCardId);
-  // //  previous card is the nearest one that has a background defined
-  // let prevIndex: number | false = cardList.map(card => card.backgroundId !== null).lastIndexOf(true, currIndex - 1);
-
-  // if (!prevIndex && prevIndex !== 0) {
-  //   prevIndex = cardList.map(card => card.backgroundId !== null).lastIndexOf(true, cardList.length - 1);
-  // }
-
-  // setCurrentCardId(cardList[prevIndex].id);
-
-  // setCurrentCardId(currentCardId > 1 ? currentCardId - 1 : 1);
-
-  const nextCard = () => {
-    setCurrentCardId(currentCardId < cardList.length ? currentCardId + 1 : cardList.length);
-  }
-
-  const addCard = () => {
-    const id = cardList[cardList.length - 1]?.id + 1 || 1;
-    setCardList([...cardList, { id: id, backgroundId: currentBackgroundId }]);
-    setCurrentCardId(id);
-  }
-
-  const nextOffset = () => {
-    const setTo = newOffset < 200 ? newOffset + 10 : newElementPosition;
-    setNewOffset(setTo);
-  }
-
-  const addElement = (
-    type: "button" | "field",
-    pos: [number, number, number, number] = [newOffset, newOffset, 120, 40]) => {
-
-    const cardId = backgroundMode ? currentBackgroundId : currentCardId;
-    const id: string = uuid();
-    setElementList([...elementList, { id: id, type: type, cardId: cardId, pos: pos }]);
-    nextOffset();
-
-  }
-
   useEffect(() => {
     localStorage.setItem("elementList", JSON.stringify(elementList));
   }, [elementList]);
@@ -128,16 +78,15 @@ function App() {
     if (!element.classList.contains('movable')) return;
 
     activeElement = element;
-
     const rect = activeElement.getBoundingClientRect();
-
     activeElementAction = (Math.abs(e.clientX - rect.right) < 20 && Math.abs(e.clientY - rect.bottom) < 20) ? "resize" : "drag";
-
-
   }
 
   const moveElement = (e) => {
     if (!activeElement) return;
+
+    // move to top
+    activeElement.style.zIndex = getMaxZIndex('.movable') + 1;
 
     const x = activeElement.offsetLeft + e.movementX;
     const y = activeElement.offsetTop + e.movementY;
@@ -146,14 +95,13 @@ function App() {
     if (y < 0 || y + activeElement.offsetHeight > 342) return;
 
     if (activeElementAction === "drag") {
-
       activeElement.style.left = `${x}px`;
       activeElement.style.top = `${y}px`;
+
     } else {
 
       const w = activeElement.offsetWidth + e.movementX;
       const h = activeElement.offsetHeight + e.movementY;
-
       activeElement.style.width = `${w}px`;
       activeElement.style.height = `${h}px`;
 
@@ -165,7 +113,7 @@ function App() {
     const otherElements = elementList.filter(el => el.id !== id);
     const updatedElement = elementList.filter(el => el.id === id)[0];
     updatedElement.pos = [x, y, w, h];
-    setElementList([updatedElement, ...otherElements]);
+    setElementList([...otherElements, updatedElement]);
   }
 
   const releaseElement = () => {
@@ -210,21 +158,20 @@ function App() {
 
         </div>
 
-        <div id="debuggerbar">
-          <button onClick={addCard}>+ card</button>
-          <button onClick={() => addElement("button")}>+ Button</button>
-          <button onClick={() => addElement("field")}>+ Field</button>
-          <button onClick={prevCard}>&lt; Prev</button>
-          {currentCardId}
-          Idx: {cardIndexById(currentCardId)}{' '}
-          Id: {currentCardId.split("-")[0]}
-          <button onClick={nextCard}>Next &gt;</button>
-          <button onClick={() => setBackgroundMode(!backgroundMode)}>BG Mode</button>
-        </div>
+        <Debugger
+          cardList={cardList}
+          setCardList={setCardList}
+          elementList={elementList}
+          setElementList={setElementList}
+          currentCardId={currentCardId}
+          setCurrentCardId={setCurrentCardId}
+          backgroundMode={backgroundMode}
+          setBackgroundMode={setBackgroundMode}
+          currentBackgroundId={currentBackgroundId}
+          setCurrentBackgroundId={setCurrentBackgroundId}
+        />
 
       </div>
-
-
 
     </>
   );
