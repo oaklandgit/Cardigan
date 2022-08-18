@@ -20,9 +20,10 @@ export default function Debugger({
   const [nextOffset, setNextOffset] = useState(startPosition);
 
   function addElement(type: "button" | "field", pos: [number, number, number, number] = [nextOffset.x, nextOffset.y, 120, 40]) {
+
     const cardId = backgroundMode ? currentBackgroundId : currentCardId;
-    const id: string = uuid();
-    setElementList([...elementList, { id: id, type: type, cardId: cardId, pos: pos }]);
+
+    setElementList([...elementList, { id: uuid(), type: type, cardId: cardId, pos: pos }]);
 
     setNextOffset({ x: nextOffset.x + 8, y: nextOffset.y + 8 });
 
@@ -33,18 +34,55 @@ export default function Debugger({
   }
 
   function addCard() {
-    //const id = cardList[cardList.length - 1]?.id + 1 || 1;
     const id = uuid();
     setCardList([...cardList, { id: id, backgroundId: currentBackgroundId }]);
     setCurrentCardId(id);
   }
 
+  function getCardIndexById(id: string) {
+    return cardList.findIndex(card => card.id === id);
+  }
+
+  function getCardIdByIndex(index: number) {
+    return cardList[index].id || false;
+  }
+
+
   function prevCard() {
-    console.log('prev card');
+
+    const allCards = cardList.filter(card => card.backgroundId != undefined);
+    const currIndex = allCards.findIndex(card => card.id === currentCardId);
+
+    console.log(currIndex);
+
+    let prevId: number;
+
+    if (currIndex !== 0) {
+      prevId = allCards[currIndex - 1].id;
+    } else {
+      prevId = allCards[allCards.length - 1].id;
+    }
+
+    console.log(prevId);
+    setCurrentCardId(prevId);
   }
 
   function nextCard() {
-    console.log('next card');
+    const allCards = cardList.filter(card => card.backgroundId != undefined);
+    const currIndex = allCards.findIndex(card => card.id === currentCardId);
+
+    console.log(currIndex);
+
+    let nextId: number;
+
+    if (currIndex !== allCards.length - 1) {
+      nextId = allCards[currIndex + 1].id;
+    } else {
+      nextId = allCards[0].id;
+    }
+
+    console.log(nextId);
+    setCurrentCardId(nextId);
   }
 
   return (

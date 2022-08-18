@@ -38,16 +38,11 @@ function App() {
   const newElementPosition = 100;
 
   // other reactive components
-  const [currentBackgroundId, setCurrentBackgroundId] = useState(0);
+  const [currentBackgroundId, setCurrentBackgroundId] = useState(defaultBackgroundId);
   const [cardElements, setCardElements] = useState([]);
   const [backgroundElements, setBackgroundElements] = useState([]);
   const [newOffset, setNewOffset] = useState(newElementPosition);
   const [backgroundMode, setBackgroundMode] = useState(false);
-
-  //helper
-  const cardIndexById = (id: string) => {
-    return cardList.findIndex(item => item.id === id);
-  }
 
   useEffect(() => {
     localStorage.setItem("elementList", JSON.stringify(elementList));
