@@ -69,7 +69,11 @@ function App() {
   let activeElementAction = null;
 
   const grabElement = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    
     const element = e.target as HTMLElement;
+
+    // don't move non-movable elements
     if (!element.classList.contains('movable')) return;
 
     activeElement = element;
@@ -81,7 +85,7 @@ function App() {
     if (!activeElement) return;
 
     // move to top
-    activeElement.style.zIndex = getMaxZIndex('.movable') + 1;
+    //activeElement.style.zIndex = getMaxZIndex('.movable') + 1; // TO DO - this should be confined to its layer
 
     const x = activeElement.offsetLeft + e.movementX;
     const y = activeElement.offsetTop + e.movementY;

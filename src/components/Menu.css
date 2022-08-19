@@ -13,3 +13,7 @@ ul.menu {
 ul.menu li {
     white-space: nowrap;
 }
+
+.menu li.section {
+  border-top: 1px solid black;
+}
