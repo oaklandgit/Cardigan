@@ -4,7 +4,7 @@ export const menubarItems = [
     label: "",
     items: [{ label: "uno" }, { label: "dos" }, { label: "tres" }],
   },
-  { id: "file", label: "File" },
+  { id: "file", label: "File", items: [{label: "🤡"}, {label: "👽"}, {label: "😻"}] },
   {
     id: "edit",
     label: "Edit",

@@ -1,7 +1,5 @@
 .menubar {
   box-sizing: border-box;
-/*   border-top: 3px solid transparent; */
-/*   border-bottom: 3px solid transparent; */
   background-color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -11,7 +9,7 @@
 }
 
 .menubar.backgroundMode {
-  border-top: 3px solid black;
-  border-bottom: 3px solid black;
-  border-image: repeating-linear-gradient( -45deg, black, black 2px, white 2px, white 8px) 3;
+  background-image: url('../assets/patterns/stripe.svg'), url('../assets/patterns/stripe.svg');
+  background-position: top left, bottom left;
+  background-repeat: repeat-x, repeat-x;
 }
