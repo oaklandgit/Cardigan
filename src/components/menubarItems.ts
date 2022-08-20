@@ -15,17 +15,13 @@ export const menubarItems = [
       { label: "Past", shortcut: "⌘V" },
       {
         label: "Clear",
-        callback: () => {
-          console.log('menu: clear');
-        },
+        action: "actionClear"
       },
       {
         label: "New Card",
         shortcut: "⌘N",
         section: true,
-        callback: () => {
-         console.log('menu: new card');
-        },
+        action: "actionNewCard",
       },
       { label: "Delete Card" },
       { label: "Cut Card" },
@@ -72,29 +68,21 @@ export const menubarItems = [
         label: "Bring Closer",
         section: true,
         shortcut: "⌘+",
-        callback: () => {
-          console.log('menu: bring closer');
-        },
+        action: "actionBringCloser"
       },
       {
         label: "Send Farther",
         shortcut: "⌘-",
-        callback: () => {
-          console.log('menu: send farther');
-        },
+        action: "actionSendFarther"
       },
       {
         label: "New Button",
         section: true,
-        callback: () => {
-          console.log('menu: new button');
-        },
+        action: "actionNewButton"
       },
       {
         label: "New Field",
-        callback: () => {
-          console.log('menu: new field');
-        },
+        action: "actionNewField"
       },
       { label: "New Background" },
     ],

@@ -3,7 +3,7 @@ import { menubarItems } from './menubarItems';
 import Menu from './Menu';
 import styles from './Menubar.module.css';
 
-export default function Menubar({ mode }) {
+export default function Menubar({ mode, handleAction }) {
 
   const [selectedMenuIndex, setSelectedMenuIndex] = useState(null);
 
@@ -22,9 +22,10 @@ export default function Menubar({ mode }) {
   return (
 
     <div className={`${styles.menubar} ${mode && styles.backgroundMode}`}>
+      
       {menubarItems.map((item, index) => (
         <div key={item.id} onClick={() => toggleMenu(index)}>
-          <Menu hide={hide} active={index === selectedMenuIndex ? true : false} label={item.label} items={item.items} />
+          <Menu hide={hide} active={index === selectedMenuIndex ? true : false} label={item.label} items={item.items} handleAction={handleAction} />
         </div>
       ))}
     </div>

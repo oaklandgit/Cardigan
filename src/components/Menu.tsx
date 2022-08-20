@@ -1,6 +1,6 @@
 import styles from './Menu.module.css';
 
-export default function Menu({ label, items, active, hide }) {
+export default function Menu({ label, items, active, hide, handleAction }) {
 
   return (
 
@@ -10,8 +10,9 @@ export default function Menu({ label, items, active, hide }) {
 
       {items &&
         <div className={styles.menu} style={{ display: active ? 'block' : 'none' }}>
-          {items.map((item: { label: string, section: boolean, shortcut: string }, index: number) =>
+          {items.map((item: { label: string, section: boolean, shortcut: string, callback: () => void }, index: number) =>
             <div
+              onMouseUp={() => handleAction(item.action)}
               key={index}
               className={`${styles.item} ${item.section && styles.section}`}>
               {item.label}

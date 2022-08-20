@@ -129,6 +129,16 @@ function App() {
     }
   }
 
+  /* //////////////// ACTIONS //////////////// */
+  
+  const handleAction = (action: string) => {
+
+
+  }
+
+
+   /* //////////////// COMPONENT //////////////// */
+  
   return (
     <>
       <div id="desktop"
@@ -136,7 +146,7 @@ function App() {
         onMouseMove={e => moveElement(e)}
         onMouseUp={e => releaseElement()}
       >
-        <Menubar mode={backgroundMode} />
+        <Menubar mode={backgroundMode} handleAction={handleAction} />
 
         <div id="stack">
           {/* background */}
