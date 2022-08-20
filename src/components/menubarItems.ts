@@ -8,7 +8,6 @@ export const menubarItems = [
   {
     id: "edit",
     label: "Edit",
-    // component: Menu,
     items: [
       { label: "Undo", shortcut: "⌘Z" },
       { label: "Cut", shortcut: "⌘X", section: true },
@@ -17,7 +16,7 @@ export const menubarItems = [
       {
         label: "Clear",
         callback: () => {
-          deleteSelectedElement();
+          console.log('menu: clear');
         },
       },
       {
@@ -25,7 +24,7 @@ export const menubarItems = [
         shortcut: "⌘N",
         section: true,
         callback: () => {
-          console.log(createCard(1, false)); // for now, bg is always 1
+         console.log('menu: new card');
         },
       },
       { label: "Delete Card" },
@@ -44,7 +43,6 @@ export const menubarItems = [
   {
     id: "go",
     label: "Go",
-    // component: Menu,
     items: [
       { label: "Back", shortcut: "⌘~" },
       { label: "Home", shortcut: "⌘H" },
@@ -64,7 +62,6 @@ export const menubarItems = [
   {
     id: "objects",
     label: "Objects",
-    // component: Menu,
     items: [
       { label: "Button Info…", disabled: true },
       { label: "Field Info…", disabled: true },
@@ -76,29 +73,27 @@ export const menubarItems = [
         section: true,
         shortcut: "⌘+",
         callback: () => {
-          reorderTo(-1);
+          console.log('menu: bring closer');
         },
       },
       {
         label: "Send Farther",
         shortcut: "⌘-",
         callback: () => {
-          reorderTo(1);
+          console.log('menu: send farther');
         },
       },
       {
         label: "New Button",
         section: true,
         callback: () => {
-          // $appMode = "button";
-          // createButton($currentCard);
+          console.log('menu: new button');
         },
       },
       {
         label: "New Field",
         callback: () => {
-          // $appMode = "field";
-          // createField($currentCard);
+          console.log('menu: new field');
         },
       },
       { label: "New Background" },
@@ -106,6 +101,5 @@ export const menubarItems = [
   },
   {
     id: "styles", label: "Styles",
-    // component: Menu
   }
 ];

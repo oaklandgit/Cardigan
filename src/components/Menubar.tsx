@@ -1,21 +1,32 @@
+import { useState } from 'react';
 import { menubarItems } from './menubarItems';
 import Menu from './Menu';
 import styles from './Menubar.module.css';
 
 export default function Menubar({ mode }) {
 
+  const [selectedMenuIndex, setSelectedMenuIndex] = useState(null);
+
+  const toggleMenu = (index: number) => {
+    if (selectedMenuIndex === index) {
+      setSelectedMenuIndex(null);
+      return;
+    }
+    setSelectedMenuIndex(index);
+  }
+
+  const hide = (index: number) => {
+    setSelectedMenuIndex(null);
+  }
+
   return (
 
     <div className={`${styles.menubar} ${mode && styles.backgroundMode}`}>
-
-      <ul className={styles.label}>
-        {menubarItems.map((item) => (
-          <li key={item.id}>
-            <Menu label={item.label} items={item.items} />
-          </li>
-        ))}
-      </ul>
-
+      {menubarItems.map((item, index) => (
+        <div key={item.id} onClick={() => toggleMenu(index)}>
+          <Menu hide={hide} active={index === selectedMenuIndex ? true : false} label={item.label} items={item.items} />
+        </div>
+      ))}
     </div>
   )
 }

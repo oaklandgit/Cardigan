@@ -1,23 +1,26 @@
-import { useState } from 'react';
-
 import styles from './Menu.module.css';
 
-export default function Menu({ label, items }) {
-
-  const [menuActive, setMenuActive] = useState(false);
+export default function Menu({ label, items, active, hide }) {
 
   return (
 
-    <div onClick={() => setMenuActive(!menuActive)} className="menuLabel">{label}
-    
+    <div onMouseLeave={hide} className={`${styles.label} ${active && styles.active}`}>
+
+      {label}
+
       {items &&
-      <ul className={styles.menu} style={{ display: menuActive ? 'block' : 'none' }}>
-        {items.map((item: { label: string, section: boolean }) => 
-          <li className={item.section && styles.section}>{item.label}</li>
-        )}
-      </ul>
+        <div className={styles.menu} style={{ display: active ? 'block' : 'none' }}>
+          {items.map((item: { label: string, section: boolean, shortcut: string }, index: number) =>
+            <div
+              key={index}
+              className={`${styles.item} ${item.section && styles.section}`}>
+              {item.label}
+              <span className={styles.shortcut}>{item.shortcut}</span>
+            </div>
+          )}
+        </div>
       }
-    
+
 
     </div>
   )
