@@ -1,4 +1,4 @@
-#card {
+.card {
   position: absolute;
   top: 0;
   left: 0;
@@ -8,7 +8,7 @@
   border-bottom-right-radius: 10px;
 }
 
-#card.background {
+.card.background {
   border-top: 1px solid black;
   position: relative;
   background-color: white;

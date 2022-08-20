@@ -1,12 +1,12 @@
 import Button from './Button';
 import Field from './Field';
-import './Card.css';
+import styles from './Card.module.css';
 
 export default function Card({ elements, isBackground }) {
 
   return (
 
-    <div id="card" className={isBackground ? 'background' : ''}>
+    <div className={`${styles.card} ${isBackground && styles.background}`}>
       {elements.map((el: { id: number, type: "button" | "field", pos: [number, number, number, number] }) => {
 
         if (el.type === "button") {

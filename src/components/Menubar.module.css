@@ -1,4 +1,4 @@
-#menubar {
+.menubar {
   box-sizing: border-box;
   border-top: 3px solid transparent;
   border-bottom: 3px solid transparent;
@@ -9,13 +9,13 @@
   z-index: 1000;
 }
 
-#menubar.backgroundMode {
+.menubar.backgroundMode {
   border-top: 3px solid black;
   border-bottom: 3px solid black;
   border-image: repeating-linear-gradient( -45deg, black, black 2px, white 2px, white 8px) 3;
 }
 
-#menubar ul {
+.menubar ul {
   list-style: none;
 }
 

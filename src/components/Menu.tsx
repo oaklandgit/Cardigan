@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import './Menu.css';
+import styles from './Menu.module.css';
 
 export default function Menu({ label, items }) {
 
@@ -11,9 +11,9 @@ export default function Menu({ label, items }) {
     <div onClick={() => setMenuActive(!menuActive)} className="menuLabel">{label}
     
       {items &&
-      <ul className="menu" style={{ display: menuActive ? 'block' : 'none' }}>
+      <ul className={styles.menu} style={{ display: menuActive ? 'block' : 'none' }}>
         {items.map((item: { label: string, section: boolean }) => 
-          <li className={item.section ? 'section': ''}>{item.label}</li>
+          <li className={item.section && styles.section}>{item.label}</li>
         )}
       </ul>
       }

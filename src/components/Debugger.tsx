@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Debugger.css';
+import styles from './Debugger.module.css';
 import { v4 as uuid } from 'uuid';
 
 export default function Debugger({
@@ -53,7 +53,7 @@ export default function Debugger({
 
   return (
 
-    <div id="debuggerbar">
+    <div id={styles.debuggerbar}>
       <button onClick={addCard}>+ card</button>
       <button onClick={() => addElement("button")}>+ Button</button>
       <button onClick={() => addElement("field")}>+ Field</button>
