@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { menubarItems } from './menubarItems';
+// import MenuTitle from './MenuTitle';
 import Menu from './Menu';
+import MenuItem from './MenuItem';
 import styles from './Menubar.module.css';
 
 export default function Menubar({ mode, handleAction }) {
@@ -15,19 +17,34 @@ export default function Menubar({ mode, handleAction }) {
     setSelectedMenuIndex(index);
   }
 
-  const hide = (index: number) => {
-    setSelectedMenuIndex(null);
-  }
-
   return (
 
     <div className={`${styles.menubar} ${mode && styles.backgroundMode}`}>
-      
-      {menubarItems.map((item, index) => (
-        <div key={item.id} onClick={() => toggleMenu(index)}>
-          <Menu hide={hide} active={index === selectedMenuIndex ? true : false} label={item.label} items={item.items} handleAction={handleAction} />
-        </div>
-      ))}
+
+      {menubarItems.map( (menu, i) =>
+        (
+        <div
+          key={i}
+          onClick={() => toggleMenu(i)}
+          onMouseLeave={() => setSelectedMenuIndex(null)}
+        >
+          <Menu
+            title={menu.label}
+            isActive={i === selectedMenuIndex}
+          >
+          {menu.items?.map( (item, j) => 
+            <MenuItem
+              key={j}
+              title={item.label}
+              shortcut={item.shortcut}
+              section={item.section}
+            />
+          )}
+        </Menu>
+       </div>
+        )
+      )}
+
     </div>
   )
 }
