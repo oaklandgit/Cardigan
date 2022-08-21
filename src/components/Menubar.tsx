@@ -26,7 +26,7 @@ export default function Menubar({ mode, handleAction }) {
         <div key={i} onMouseLeave={() => setSelectedMenuIndex(null)} onClick={() => toggleMenu(i)}>
           <Menu title={menu.label} isActive={i === selectedMenuIndex}>
           {menu.items?.map( (item, j) => 
-            <MenuItem key={j} title={item.label} />
+            <MenuItem key={j} title={item.label} shortcut={item.shortcut} section={item.section} />
           )}
         </Menu>
        </div>

@@ -8,3 +8,11 @@
   color: white;
   cursor: pointer;
 }
+
+.shortcut {
+  float: right;
+}
+
+.section {
+  border-top: 1px solid black;
+}
