@@ -1,4 +1,13 @@
-.label {
+.menu {
+  position: absolute;
+  border: 2px solid black;
+  background-color: white;
+  top: 24px;
+  left: 0;
+  min-width: 160px;
+}
+
+/* .label {
   padding: 4px 8px;
   position: relative;
 }
@@ -35,4 +44,4 @@
 
 .shortcut {
   float: right;
-}
+} */

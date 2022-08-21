@@ -1,0 +1,10 @@
+.title {
+  padding: 2px 4px;
+  position: relative;
+}
+
+.title:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
