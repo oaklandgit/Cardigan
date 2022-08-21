@@ -23,10 +23,22 @@ export default function Menubar({ mode, handleAction }) {
 
       {menubarItems.map( (menu, i) =>
         (
-        <div key={i} onMouseLeave={() => setSelectedMenuIndex(null)} onClick={() => toggleMenu(i)}>
-          <Menu title={menu.label} isActive={i === selectedMenuIndex}>
+        <div
+          key={i}
+          onClick={() => toggleMenu(i)}
+          onMouseLeave={() => setSelectedMenuIndex(null)}
+        >
+          <Menu
+            title={menu.label}
+            isActive={i === selectedMenuIndex}
+          >
           {menu.items?.map( (item, j) => 
-            <MenuItem key={j} title={item.label} shortcut={item.shortcut} section={item.section} />
+            <MenuItem
+              key={j}
+              title={item.label}
+              shortcut={item.shortcut}
+              section={item.section}
+            />
           )}
         </Menu>
        </div>
