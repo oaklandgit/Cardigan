@@ -4,7 +4,7 @@ export const menubarItems = [
     label: "",
     items: [{ label: "uno" }, { label: "dos" }, { label: "tres" }],
   },
-  { id: "file", label: "File", items: [{label: "🤡"}, {label: "👽"}, {label: "😻"}] },
+  { id: "file", label: "File", items: [{ label: "🤡" }, { label: "👽" }, { label: "😻" }] },
   {
     id: "edit",
     label: "Edit",
@@ -21,7 +21,7 @@ export const menubarItems = [
         label: "New Card",
         shortcut: "⌘N",
         section: true,
-        action: "actionNewCard",
+        action: "newCard",
       },
       { label: "Delete Card" },
       { label: "Cut Card" },
@@ -32,7 +32,7 @@ export const menubarItems = [
         section: true,
         disabled: true,
       },
-      { label: "Background", shortcut: "⌘B" },
+      { label: "Background", shortcut: "⌘B", action: "backgroundMode" },
       { label: "Icon", shortcut: "⌘I" },
     ],
   },
@@ -45,8 +45,8 @@ export const menubarItems = [
       { label: "Help", shortcut: "⌘?" },
       { label: "Recent", shortcut: "⌘R" },
       { label: "First", shortcut: "⌘1", section: true },
-      { label: "Previous", shortcut: "⌘2" },
-      { label: "Next", shortcut: "⌘3" },
+      { label: "Previous", shortcut: "⌘2", action: "prevCard" },
+      { label: "Next", shortcut: "⌘3", action: "nextCard" },
       { label: "Last", shortcut: "⌘4" },
       { label: "Find…", shortcut: "⌘F", section: true },
       { label: "Message", shortcut: "⌘M" },
@@ -54,7 +54,7 @@ export const menubarItems = [
       { label: "Next Window", shortcut: "⌘L", disabled: true },
     ],
   },
-  { id: "tools", label: "Tools"},
+  { id: "tools", label: "Tools" },
   {
     id: "objects",
     label: "Objects",
@@ -78,11 +78,11 @@ export const menubarItems = [
       {
         label: "New Button",
         section: true,
-        action: "actionNewButton"
+        action: "newButton"
       },
       {
         label: "New Field",
-        action: "actionNewField"
+        action: "newField"
       },
       { label: "New Background" },
     ],

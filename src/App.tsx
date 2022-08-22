@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Menubar from './components/Menubar';
 import Card from './components/Card';
-import Debugger from './components/Debugger';
+// import Debugger from './components/Debugger';
 import { getMaxZIndex } from './lib/helpers';
 import './App.css';
 
@@ -70,7 +70,7 @@ function App() {
 
   const grabElement = (e: React.MouseEvent) => {
     e.stopPropagation();
-    
+
     const element = e.target as HTMLElement;
 
     // don't move non-movable elements
@@ -130,15 +130,15 @@ function App() {
   }
 
   /* //////////////// ACTIONS //////////////// */
-  
+
   const handleAction = (action: string) => {
 
 
   }
 
 
-   /* //////////////// COMPONENT //////////////// */
-  
+  /* //////////////// COMPONENT //////////////// */
+
   return (
     <>
       <div id="desktop"
@@ -146,7 +146,19 @@ function App() {
         onMouseMove={e => moveElement(e)}
         onMouseUp={e => releaseElement()}
       >
-        <Menubar mode={backgroundMode} handleAction={handleAction} />
+        <Menubar
+          mode={backgroundMode}
+          cardList={cardList}
+          setCardList={setCardList}
+          elementList={elementList}
+          setElementList={setElementList}
+          currentCardId={currentCardId}
+          setCurrentCardId={setCurrentCardId}
+          backgroundMode={backgroundMode}
+          setBackgroundMode={setBackgroundMode}
+          currentBackgroundId={currentBackgroundId}
+          setCurrentBackgroundId={setCurrentBackgroundId}
+        />
 
         <div id="stack">
           {/* background */}
@@ -166,19 +178,6 @@ function App() {
           }
 
         </div>
-
-        <Debugger
-          cardList={cardList}
-          setCardList={setCardList}
-          elementList={elementList}
-          setElementList={setElementList}
-          currentCardId={currentCardId}
-          setCurrentCardId={setCurrentCardId}
-          backgroundMode={backgroundMode}
-          setBackgroundMode={setBackgroundMode}
-          currentBackgroundId={currentBackgroundId}
-          setCurrentBackgroundId={setCurrentBackgroundId}
-        />
 
       </div>
 
