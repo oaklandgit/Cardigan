@@ -102,15 +102,8 @@ function App() {
     activeElementAction = (Math.abs(e.clientX - rect.right) < 20 && Math.abs(e.clientY - rect.bottom) < 20) ? "resize" : "drag";
   }
 
-  // const changeElement = (e) => {
-  //   console.log("changed!!!!")
-  // }
-
   const moveElement = (e) => {
     if (!activeElement) return;
-
-    // move to top
-    //activeElement.style.zIndex = getMaxZIndex('.movable') + 1; // TO DO - this should be confined to its layer
 
     const x = activeElement.offsetLeft + e.movementX;
     const y = activeElement.offsetTop + e.movementY;
@@ -154,16 +147,13 @@ function App() {
     }
   }
 
-  const handleMount = (id) => {
-    console.log(`field ${id} mounted!`);
-    let content = "empty";
-    content = stackData.filter((d) => d.elementId === id)[0]?.content
+  const handleMount = ((ref, id) => {
+    const content = stackData.filter((d) => d.elementId === id)[0]?.content
     console.log(content);
-  }
+    ref.current.defaultValue = content;
+  });
 
   const handleBlur = ((el, id) => {
-
-    console.log(el.target.value);
 
     let exists = false;
 
