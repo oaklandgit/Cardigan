@@ -54,7 +54,22 @@ export const menubarItems = [
       { label: "Next Window", shortcut: "⌘L", disabled: true },
     ],
   },
-  { id: "tools", label: "Tools" },
+  {
+    id: "tools",
+    label: "Tools",
+    type: "palette",
+    items: [
+      { label: "Browse", icon: "browse.svg" },
+      { label: "Button", icon: "browse.svg" },
+      { label: "Field", icon: "field.svg" },
+      { label: "Brush", icon: "brush.svg", section: "true" },
+      { label: "Pencil", icon: "pencil.svg" },
+      { label: "Eraser", icon: "eraser.svg" },
+      { label: "Line", icon: "line.svg" },
+      { label: "Lasso", icon: "lasso.svg" },
+      { label: "Marquee", icon: "marquee.svg" },
+    ]
+  },
   {
     id: "objects",
     label: "Objects",

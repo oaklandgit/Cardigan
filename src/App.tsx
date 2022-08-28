@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import Menubar from './components/Menubar';
 import Card from './components/Card';
-// import Debugger from './components/Debugger';
-import { getMaxZIndex } from './lib/helpers';
 import './App.css';
 
 function App() {
@@ -37,6 +35,25 @@ function App() {
 
   const newElementPosition = 100;
 
+  // Data
+
+  const testData = [
+
+    {
+      type: "string",
+      content: "hello",
+      cardId: "327626c9-3b37-44a0-ac0a-ff52c6523804",
+      elementId: "212780a6-52fe-43e6-a5e3-805e7204fa18"
+    }
+
+  ];
+
+  const [stackData, setStackData] = useState(() => {
+    const saved = localStorage.getItem("stackData");
+    const initialValue = JSON.parse(saved);
+    return initialValue || testData;
+  });
+
   // other reactive components
   const [currentBackgroundId, setCurrentBackgroundId] = useState(defaultBackgroundId);
   const [cardElements, setCardElements] = useState([]);
@@ -51,6 +68,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem("cardList", JSON.stringify(cardList));
   }, [cardList]);
+
+  useEffect(() => {
+    localStorage.setItem("stackData", JSON.stringify(stackData));
+  }, [stackData]);
 
   useEffect(() => {
     localStorage.setItem("currentCardId", currentCardId);
@@ -80,6 +101,10 @@ function App() {
     const rect = activeElement.getBoundingClientRect();
     activeElementAction = (Math.abs(e.clientX - rect.right) < 20 && Math.abs(e.clientY - rect.bottom) < 20) ? "resize" : "drag";
   }
+
+  // const changeElement = (e) => {
+  //   console.log("changed!!!!")
+  // }
 
   const moveElement = (e) => {
     if (!activeElement) return;
@@ -129,13 +154,40 @@ function App() {
     }
   }
 
-  /* //////////////// ACTIONS //////////////// */
-
-  const handleAction = (action: string) => {
-
-
+  const handleMount = (id) => {
+    console.log(`field ${id} mounted!`);
+    let content = "empty";
+    content = stackData.filter((d) => d.elementId === id)[0]?.content
+    console.log(content);
   }
 
+  const handleBlur = ((el, id) => {
+
+    console.log(el.target.value);
+
+    let exists = false;
+
+    const newDataState = stackData.map(row => {
+      if (row.elementId === id) {
+        exists = true;
+        return { ...row, content: el.target.value };
+      }
+      return row;
+    });
+
+    if (exists) {
+      setStackData(newDataState);
+    } else {
+      const newRow = {
+        type: "string",
+        content: el.target.value,
+        cardId: currentCardId,
+        elementId: id
+      }
+      setStackData([...stackData, newRow]);
+    }
+
+  });
 
   /* //////////////// COMPONENT //////////////// */
 
@@ -166,6 +218,8 @@ function App() {
             key={currentBackgroundId}
             elements={backgroundElements}
             isBackground={true}
+            handleMount={handleMount}
+            handleBlur={handleBlur}
           />
 
           {/* active card */}
@@ -174,12 +228,26 @@ function App() {
               key={currentCardId}
               elements={cardElements}
               isBackground={false}
+              handleMount={handleMount}
+              handleBlur={handleBlur}
             />
           }
 
         </div>
 
+        <div style={{
+          marginTop: '16px',
+          fontSize: '12px',
+          padding: '8px',
+          borderRadius: '8px',
+          backgroundColor: 'white'
+        }}>
+          Card Id: {currentCardId.split('-')[0]}
+          <br />Background Id: {currentBackgroundId.split('-')[0]}
+        </div>
       </div>
+
+
 
     </>
   );

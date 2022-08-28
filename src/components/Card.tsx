@@ -2,7 +2,7 @@ import Button from './Button';
 import Field from './Field';
 import styles from './Card.module.css';
 
-export default function Card({ elements, isBackground }) {
+export default function Card({ elements, isBackground, handleMount, handleBlur }) {
 
   return (
 
@@ -28,6 +28,8 @@ export default function Card({ elements, isBackground }) {
             y={el.pos[1]}
             w={el.pos[2]}
             h={el.pos[3]}
+            handleMount={handleMount}
+            handleBlur={handleBlur}
           />)
         }
 

@@ -98,20 +98,21 @@ export default function Menubar({
 
       {menubarItems.map((menu, i) =>
       (
+
         <div
           key={i}
           onClick={() => toggleMenu(i)}
           onMouseLeave={() => setSelectedMenuIndex(null)}
         >
           <Menu
+            type={menu.type || "menu"}
             title={menu.label}
             isActive={i === selectedMenuIndex}
           >
             {menu.items?.map((item, j) =>
 
-              <div onMouseUp={() => doAction(item.action)}>
+              <div key={j} onMouseUp={() => doAction(item.action)}>
                 <MenuItem
-                  key={j}
                   title={item.label}
                   shortcut={item.shortcut}
                   section={item.section}
