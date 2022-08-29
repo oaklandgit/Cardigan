@@ -59,9 +59,9 @@ export const menubarItems = [
     label: "Tools",
     type: "palette",
     items: [
-      { label: "Browse", icon: "browse.svg" },
-      { label: "Button", icon: "browse.svg" },
-      { label: "Field", icon: "field.svg" },
+      { label: "Browse", icon: "browse.svg", action: "browseMode" },
+      { label: "Button", icon: "browse.svg", action: "buttonMode"  },
+      { label: "Field", icon: "field.svg", action: "fieldMode" },
       { label: "Brush", icon: "brush.svg", section: "true" },
       { label: "Pencil", icon: "pencil.svg" },
       { label: "Eraser", icon: "eraser.svg" },

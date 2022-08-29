@@ -7,6 +7,7 @@ import styles from './Menubar.module.css';
 
 export default function Menubar({
   mode,
+  setMode,
   cardList,
   setCardList,
   elementList,
@@ -51,12 +52,26 @@ export default function Menubar({
 
   const actions = {
 
+    browseMode: () => {
+      setMode("browse");
+    },
+
+    fieldMode: () => {
+      setMode("field");
+    },
+
+    buttonMode: () => {
+      setMode("button");
+    },
+
     newButton: () => {
       addElement("button");
+      setMode("button");
     },
 
     newField: () => {
       addElement("field");
+      setMode("field");
     },
 
     newCard: () => {
@@ -94,7 +109,7 @@ export default function Menubar({
 
   return (
 
-    <div className={`${styles.menubar} ${mode && styles.backgroundMode}`}>
+    <div className={`${styles.menubar} ${backgroundMode && styles.backgroundMode}`}>
 
       {menubarItems.map((menu, i) =>
       (

@@ -2,12 +2,15 @@ import Button from './Button';
 import Field from './Field';
 import styles from './Card.module.css';
 
-export default function Card({ elements, isBackground, handleMount, handleBlur }) {
+export default function Card({ elements, isBackground, handleMount, handleBlur, mode }) {
 
   return (
 
     <div className={`${styles.card} ${isBackground && styles.background}`}>
-      {elements.map((el: { id: number, type: "button" | "field", pos: [number, number, number, number] }) => {
+
+      <canvas className={styles.canvas}></canvas>
+      
+      {elements.map((el) => {
 
         if (el.type === "button") {
           return (<Button
@@ -18,6 +21,7 @@ export default function Card({ elements, isBackground, handleMount, handleBlur }
             y={el.pos[1]}
             w={el.pos[2]}
             h={el.pos[3]}
+            editMode={mode === 'button'}
           />)
         } else if (el.type === "field") {
           return (<Field
@@ -30,6 +34,7 @@ export default function Card({ elements, isBackground, handleMount, handleBlur }
             h={el.pos[3]}
             handleMount={handleMount}
             handleBlur={handleBlur}
+            editMode={mode === 'field'}
           />)
         }
 

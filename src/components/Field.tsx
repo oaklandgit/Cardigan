@@ -6,7 +6,8 @@ export default function Field({
   x, y,
   w, h,
   handleMount,
-  handleBlur
+  handleBlur,
+  editMode
 }) {
 
   const ref = useRef(null);
@@ -18,9 +19,15 @@ export default function Field({
   return (
     <textarea
       ref={ref}
-      className={styles.field + ' movable'}
+      className={`${styles.field} ${editMode && styles.editMode} movable field`}
       id={id}
-      style={{ left: `${x}px`, top: `${y}px`, width: `${w}px`, height: `${h}px` }}
+      readOnly={editMode}
+      style={{
+        left: x + 'px',
+        top: y + 'px',
+        width: w + 'px',
+        height: h + 'px'
+      }}
       onBlur={(el) => handleBlur(el, id)}
     >
     </textarea>
